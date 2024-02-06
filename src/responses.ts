@@ -1,4 +1,8 @@
-import {AaioResponse} from "./types";
+type AaioResponse = {
+    type: 'success' | 'error';
+    code?: 400 | 401;
+    message?: string;
+}
 
 export interface PaymentInfoResponse extends AaioResponse {
     id: string;

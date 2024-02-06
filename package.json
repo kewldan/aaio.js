@@ -1,19 +1,20 @@
 {
   "name": "aaio.js",
-  "version": "1.0.5",
+  "type": "module",
+  "version": "1.0.8",
   "description": "",
-  "main": "dist/aaio.js.mjs",
+  "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc && vite build",
-    "dev": "vite"
+    "build": "rollup -c"
   },
   "devDependencies": {
-    "@types/node": "^20.10.5",
-    "@types/crypto-js": "^4.2.1",
+    "@types/node": "^20.11.16",
+    "@types/crypto-js": "^4.2.2",
     "typescript": "^5.3.3",
-    "vite": "^5.0.10",
-    "vite-plugin-dts": "^3.7.0"
+    "rollup": "^4.9.6",
+    "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-esbuild": "^6.1.1"
   },
   "keywords": [],
   "author": "kewldan",

@@ -1,20 +1,20 @@
 [code-badge]: https://img.shields.io/badge/source-black?logo=github
 
-<h1><img src="https://aaio.io/assets/landing/img/logo-m.svg" width=30 height=30 alt="AAIO Icon"> AAIO</h1>
+<h1><img src="https://aaio.so/assets/landing/img/logo-m.svg" width=30 height=30 alt="AAIO Icon"> AAIO</h1>
 
 [![kewldan - AAIO](https://img.shields.io/static/v1?label=kewldan&message=aaio.js&color=blue&logo=github)](https://github.com/kewldan/aaio.js "Go to GitHub repo")
 [![GitHub release](https://img.shields.io/github/release/kewldan/aaio.js?include_prereleases=&sort=semver&color=blue)](https://github.com/kewldan/aaio.js/releases/)
 [![License](https://img.shields.io/badge/License-MIT-blue)](#Лицензия)
 
-[AAIO Официальная документация](https://wiki.aaio.io/)
+[AAIO Официальная документация](https://wiki.aaio.so/)
 
-Библиотека для удобной работы с API AAIO https://aaio.io/ на JavaScript с поддержкой TypeScript.
+Библиотека для удобной работы с API AAIO https://aaio.so/ на JavaScript с поддержкой TypeScript.
 
 ### Ссылки
 
 * NPM - https://www.npmjs.com/package/aaio.js
 * Github - https://github.com/kewldan/aaio.js
-* AAIO - https://wiki.aaio.io/gotovye-cms-moduli-i-sdk/typescript-sdk
+* AAIO - https://wiki.aaio.so/gotovye-cms-moduli-i-sdk/typescript-sdk
 
 ## Установка
 

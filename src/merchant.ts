@@ -10,10 +10,10 @@ export class Merchant {
     private readonly apiKey: string;
 
     /**
-     * Create instance for merchant
+     * Create an instance for merchant
      * @param id Merchant ID
-     * @param secret Merchant secret key #2
-     * @param apiKey API-Key for some methods
+     * @param secret Merchant secret key NO. 2
+     * @param apiKey API-Key for some methods.
      */
     constructor(id: string, secret: string, apiKey: string) {
         this.id = id;
@@ -27,9 +27,9 @@ export class Merchant {
      * @param order_id Order ID in your system
      * @param currency Payment currency
      * @param options Additional options to payment
-     * @return Payment URL for customer
+     * @return Payment URL for a customer.
      */
-    createPayment(amount: number, order_id: string, currency: Currency, options?: {
+    public createPayment(amount: number, order_id: string, currency: Currency, options?: {
         method?: string,
         desc?: string,
         email?: string,
@@ -54,14 +54,14 @@ export class Merchant {
             }
         }
 
-        return 'https://aaio.io/merchant/pay?' + new URLSearchParams(paymentData);
+        return 'https://aaio.so/merchant/pay?' + new URLSearchParams(paymentData);
     }
 
     /**
      * Fetch payment info
      * @param orderId Your Order ID
      */
-    async getPaymentInfo(orderId: string): Promise<PaymentInfoResponse> {
+    public async getPaymentInfo(orderId: string): Promise<PaymentInfoResponse> {
         return await sendRequest(this.apiKey, '/info-pay', {
             order_id: orderId
         })
@@ -70,7 +70,7 @@ export class Merchant {
     /**
      * Fetch available payment methods (Enabled for merchant)
      */
-    async getPaymentMethods(): Promise<PaymentMethodsResponse> {
+    public async getPaymentMethods(): Promise<PaymentMethodsResponse> {
         return await sendRequest(this.apiKey, '/methods-pay', {
             merchant_id: this.id
         });

@@ -1,5 +1,5 @@
 export async function sendRequest(apiKey: string, uri: string, data?: Record<string, string | number>) {
-    const response = await fetch(`https://aaio.io/api${uri}`, {
+    const response = await fetch(`https://aaio.so/api${uri}`, {
         method: 'POST',
         body: JSON.stringify(data || {}),
         headers: {

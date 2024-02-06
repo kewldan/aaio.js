@@ -8,7 +8,7 @@ import {Currency} from "./types";
  * @param amount Payment amount
  * @param currency Payment currency
  * @param secret Secret 1st or 2nd depending on purposes
- * @param order_id Your order ID
+ * @param order_id Your order ID.
  */
 export function createPaymentSign(merchant_id: string, amount: number, currency: Currency, secret: string, order_id: string) {
     return Hex.stringify(sha256([merchant_id, String(amount), currency, secret, order_id].join(':')));

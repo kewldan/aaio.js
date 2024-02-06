@@ -13,7 +13,7 @@ import {
  * Fetch aaio IPS
  */
 export async function getIps(): Promise<IpsResponse> {
-    const request = await fetch('https://aaio.io/api/public/ips');
+    const request = await fetch('https://aaio.so/api/public/ips');
     return await request.json();
 }
 
@@ -27,7 +27,7 @@ export class Client {
     /**
      * Creates merchant with Client API key
      * @param merchantId Merchant ID from AAIO
-     * @param secretKey 1st secret key from AAIO
+     * @param secretKey 1st secret key from AAIO.
      */
     createMerchant(merchantId: string, secretKey: string) {
         return new Merchant(merchantId, secretKey, this.apiKey);
@@ -45,8 +45,8 @@ export class Client {
      * @param method Payoff method
      * @param amount Payoff amount
      * @param wallet Payoff wallet
-     * @param commissionType Commission type (0 - from amount (default), 1 - from balance)
-     * @param payoff_id Your Payoff ID
+     * @param commissionType Commission type (0 – from an amount (default), 1 – from balance)
+     * @param payoff_id Your Payoff ID.
      */
     async createPayoff(method: string, amount: number, wallet: string, commissionType: 0 | 1, payoff_id: string): Promise<CreatePayoffResponse> {
         return await sendRequest(this.apiKey, '/create-payoff', {
