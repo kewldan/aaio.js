@@ -15,18 +15,21 @@ export default [
         plugins: [esbuild()],
         output: [
             {
-                dir: "dist",
-                format: "es",
-                exports: "named"
+                file: 'dist/index.mjs',
+                format: "es"
             },
-        ],
+            {
+                file: 'dist/index.js',
+                format: "cjs"
+            },
+        ]
     }),
     bundle({
         plugins: [dts()],
-        output: {
-            dir: "dist",
-            format: "es",
-            exports: "named"
-        },
+        output: [
+            {
+                file: 'dist/index.d.ts'
+            },
+        ],
     }),
 ];

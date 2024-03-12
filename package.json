@@ -1,18 +1,23 @@
 {
   "name": "aaio.js",
   "type": "module",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "build": "rollup -c"
   },
   "devDependencies": {
-    "@types/node": "^20.11.16",
+    "@types/node": "^20.11.26",
     "@types/crypto-js": "^4.2.2",
-    "typescript": "^5.3.3",
-    "rollup": "^4.9.6",
+    "typescript": "^5.4.2",
+    "rollup": "^4.13.0",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-esbuild": "^6.1.1"
   },
