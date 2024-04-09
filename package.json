@@ -3,6 +3,9 @@
   "type": "module",
   "version": "1.0.9",
   "description": "",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "require": "./dist/index.js",
