@@ -1,7 +1,9 @@
 export async function sendRequest(apiKey: string, uri: string, data?: Record<string, string | number>) {
     const response = await fetch(`https://aaio.so/api${uri}`, {
         method: 'POST',
-        body: JSON.stringify(data || {}),
+        body: new URLSearchParams(
+            data ? Object.entries(data).map(([key, val]) => [key, String(val)]) : [],
+        ),
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/x-www-form-urlencoded',
