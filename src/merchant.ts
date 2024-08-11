@@ -63,7 +63,8 @@ export class Merchant {
      */
     public async getPaymentInfo(orderId: string): Promise<PaymentInfoResponse> {
         return await sendRequest(this.apiKey, '/info-pay', {
-            order_id: orderId
+            order_id: orderId,
+            merchant_id: this.id,
         })
     }
 
