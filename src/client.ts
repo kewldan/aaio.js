@@ -1,5 +1,5 @@
 import {Merchant} from "./merchant";
-import {sendRequest} from "./utils";
+import {sendApiRequest} from "./utils";
 import {
     BalanceResponse,
     CreatePayoffResponse,
@@ -37,7 +37,7 @@ export class Client {
      * Fetch user balance
      */
     async getBalance(): Promise<BalanceResponse> {
-        return await sendRequest(this.apiKey, '/balance');
+        return await sendApiRequest('/balance', { apiKey: this.apiKey });
     }
 
     /**
@@ -49,12 +49,15 @@ export class Client {
      * @param payoff_id Your Payoff ID.
      */
     async createPayoff(method: string, amount: number, wallet: string, commissionType: 0 | 1, payoff_id: string): Promise<CreatePayoffResponse> {
-        return await sendRequest(this.apiKey, '/create-payoff', {
+        return await sendApiRequest('/create-payoff', {
+          data: {
             my_id: payoff_id,
             method,
             amount,
             wallet,
             commission_type: commissionType,
+          },
+          apiKey: this.apiKey
         });
     }
 
@@ -62,7 +65,7 @@ export class Client {
      * Fetch payoff rates
      */
     async getPayoffRates(): Promise<PayoffRatesResponse> {
-        return await sendRequest(this.apiKey, '/rates-payoff');
+        return await sendApiRequest('/rates-payoff', { apiKey: this.apiKey });
     }
 
     /**
@@ -70,8 +73,11 @@ export class Client {
      * @param payoffId Your Payoff ID
      */
     async getPayoffInfo(payoffId: string): Promise<PayoffInfoResponse> {
-        return await sendRequest(this.apiKey, '/info-payoff', {
+        return await sendApiRequest('/info-payoff', {
+          data: {
             my_id: payoffId
+          },
+          apiKey: this.apiKey
         });
     }
 
@@ -79,6 +85,6 @@ export class Client {
      * Fetch payoff methods
      */
     async getPayoffMethods(): Promise<PayoffMethodsResponse> {
-        return await sendRequest(this.apiKey, '/methods-payoff');
+        return await sendApiRequest('/methods-payoff', { apiKey: this.apiKey });
     }
 }
