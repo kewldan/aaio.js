@@ -1,28 +1,63 @@
-import {sendRequest} from "./utils";
+import {sendApiRequest, sendMerchantRequest} from "./utils";
 import {Currency, Language} from "./types";
 import {createPaymentSign} from "./security";
-import {PaymentInfoResponse, PaymentMethodsResponse} from "./responses";
+import {GetPayUrlResponse, PaymentInfoResponse, PaymentMethodsResponse} from "./responses";
 
 
 export class Merchant {
-    private readonly id: string;
-    private readonly secret: string;
-    private readonly apiKey: string;
-
     /**
      * Create an instance for merchant
      * @param id Merchant ID
      * @param secret Merchant secret key NO. 2
      * @param apiKey API-Key for some methods.
      */
-    constructor(id: string, secret: string, apiKey: string) {
-        this.id = id;
-        this.secret = secret;
-        this.apiKey = apiKey;
+    constructor(
+      private readonly id: string,
+      private readonly secret: string,
+      private readonly apiKey: string
+    ) {}
+
+    /**
+     * Creates a payment URL for customer by request
+     * @param amount Payment amount
+     * @param order_id Order ID in your system
+     * @param currency Payment currency
+     * @param options Additional options to payment
+     * @return Payment URL for a customer.
+     */
+    public async createPaymentByRequest(amount: number, order_id: string, currency: Currency, options?: {
+        method?: string,
+        desc?: string,
+        email?: string,
+        lang?: Language,
+        referral?: string,
+        us_key?: string
+    }): Promise<string> {
+      const sign = createPaymentSign(this.id, amount, currency, this.secret, order_id);
+
+      const paymentData: Record<string, any> = {
+          merchant_id: this.id,
+          amount: String(amount),
+          order_id,
+          sign,
+          currency,
+          ...options
+      }
+
+      for (const key in paymentData) {
+          if (paymentData[key] === undefined) {
+              delete paymentData[key];
+          }
+      }
+
+      const response = await sendMerchantRequest<GetPayUrlResponse>('/get_pay_url', { data: paymentData })
+
+      return response.url
     }
 
     /**
      * Creates a payment URL for customer
+     * @deprecated Use createPaymentByRequest method instead
      * @param amount Payment amount
      * @param order_id Order ID in your system
      * @param currency Payment currency
@@ -49,7 +84,7 @@ export class Merchant {
         }
 
         for (const key in paymentData) {
-            if (!paymentData[key]) {
+            if (paymentData[key] === undefined) {
                 delete paymentData[key];
             }
         }
@@ -62,9 +97,12 @@ export class Merchant {
      * @param orderId Your Order ID
      */
     public async getPaymentInfo(orderId: string): Promise<PaymentInfoResponse> {
-        return await sendRequest(this.apiKey, '/info-pay', {
+        return await sendApiRequest('/info-pay', {
+          data: {
             order_id: orderId,
             merchant_id: this.id,
+          },
+          apiKey: this.apiKey
         })
     }
 
@@ -72,8 +110,11 @@ export class Merchant {
      * Fetch available payment methods (Enabled for merchant)
      */
     public async getPaymentMethods(): Promise<PaymentMethodsResponse> {
-        return await sendRequest(this.apiKey, '/methods-pay', {
+        return await sendApiRequest('/methods-pay', {
+          data: {
             merchant_id: this.id
+          },
+          apiKey: this.apiKey
         });
     }
 }

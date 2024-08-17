@@ -4,6 +4,10 @@ type AaioResponse = {
     message?: string;
 }
 
+export interface GetPayUrlResponse extends AaioResponse {
+    url: string
+}
+
 export interface PaymentInfoResponse extends AaioResponse {
     id: string;
     order_id: string;
