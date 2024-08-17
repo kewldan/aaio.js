@@ -37,7 +37,7 @@ export class Client {
      * Fetch user balance
      */
     async getBalance(): Promise<BalanceResponse> {
-        return await sendApiRequest('/balance', { apiKey: this.apiKey });
+        return await sendApiRequest('/balance', {apiKey: this.apiKey});
     }
 
     /**
@@ -50,14 +50,14 @@ export class Client {
      */
     async createPayoff(method: string, amount: number, wallet: string, commissionType: 0 | 1, payoff_id: string): Promise<CreatePayoffResponse> {
         return await sendApiRequest('/create-payoff', {
-          data: {
-            my_id: payoff_id,
-            method,
-            amount,
-            wallet,
-            commission_type: commissionType,
-          },
-          apiKey: this.apiKey
+            data: {
+                my_id: payoff_id,
+                method,
+                amount,
+                wallet,
+                commission_type: commissionType,
+            },
+            apiKey: this.apiKey
         });
     }
 
@@ -65,7 +65,7 @@ export class Client {
      * Fetch payoff rates
      */
     async getPayoffRates(): Promise<PayoffRatesResponse> {
-        return await sendApiRequest('/rates-payoff', { apiKey: this.apiKey });
+        return await sendApiRequest('/rates-payoff', {apiKey: this.apiKey});
     }
 
     /**
@@ -74,10 +74,10 @@ export class Client {
      */
     async getPayoffInfo(payoffId: string): Promise<PayoffInfoResponse> {
         return await sendApiRequest('/info-payoff', {
-          data: {
-            my_id: payoffId
-          },
-          apiKey: this.apiKey
+            data: {
+                my_id: payoffId
+            },
+            apiKey: this.apiKey
         });
     }
 
@@ -85,6 +85,6 @@ export class Client {
      * Fetch payoff methods
      */
     async getPayoffMethods(): Promise<PayoffMethodsResponse> {
-        return await sendApiRequest('/methods-payoff', { apiKey: this.apiKey });
+        return await sendApiRequest('/methods-payoff', {apiKey: this.apiKey});
     }
 }

@@ -12,10 +12,11 @@ export class Merchant {
      * @param apiKey API-Key for some methods.
      */
     constructor(
-      private readonly id: string,
-      private readonly secret: string,
-      private readonly apiKey: string
-    ) {}
+        private readonly id: string,
+        private readonly secret: string,
+        private readonly apiKey: string
+    ) {
+    }
 
     /**
      * Creates a payment URL for customer by request
@@ -33,26 +34,26 @@ export class Merchant {
         referral?: string,
         us_key?: string
     }): Promise<string> {
-      const sign = createPaymentSign(this.id, amount, currency, this.secret, order_id);
+        const sign = createPaymentSign(this.id, amount, currency, this.secret, order_id);
 
-      const paymentData: Record<string, any> = {
-          merchant_id: this.id,
-          amount: String(amount),
-          order_id,
-          sign,
-          currency,
-          ...options
-      }
+        const paymentData: Record<string, any> = {
+            merchant_id: this.id,
+            amount: String(amount),
+            order_id,
+            sign,
+            currency,
+            ...options
+        }
 
-      for (const key in paymentData) {
-          if (paymentData[key] === undefined) {
-              delete paymentData[key];
-          }
-      }
+        for (const key in paymentData) {
+            if (paymentData[key] === undefined) {
+                delete paymentData[key];
+            }
+        }
 
-      const response = await sendMerchantRequest<GetPayUrlResponse>('/get_pay_url', { data: paymentData })
+        const response = await sendMerchantRequest<GetPayUrlResponse>('/get_pay_url', {data: paymentData})
 
-      return response.url
+        return response.url
     }
 
     /**
@@ -98,11 +99,11 @@ export class Merchant {
      */
     public async getPaymentInfo(orderId: string): Promise<PaymentInfoResponse> {
         return await sendApiRequest('/info-pay', {
-          data: {
-            order_id: orderId,
-            merchant_id: this.id,
-          },
-          apiKey: this.apiKey
+            data: {
+                order_id: orderId,
+                merchant_id: this.id,
+            },
+            apiKey: this.apiKey
         })
     }
 
@@ -111,10 +112,10 @@ export class Merchant {
      */
     public async getPaymentMethods(): Promise<PaymentMethodsResponse> {
         return await sendApiRequest('/methods-pay', {
-          data: {
-            merchant_id: this.id
-          },
-          apiKey: this.apiKey
+            data: {
+                merchant_id: this.id
+            },
+            apiKey: this.apiKey
         });
     }
 }
