@@ -30,7 +30,7 @@ $ npm install aaio.js
 const client = new Client('API-KEY'); // Создаем клиент
 const merchant = new client.createMerchant('MERCHANT-ID', 'SECRET-KEY'); // Регистрируем магазин
 
-const payment_url = merchant.createPayment(100, 'my-order-id'); // Создаем ссылку для оплаты
+const payment_url = await merchant.createPaymentByRequest(100, 'my-order-id'); // Создаем ссылку для оплаты 
 
 // Отправляем payment_url клиенту, ждем оплату
 
